@@ -1,0 +1,28 @@
+{
+  "name": "@devs-studio/array",
+  "version": "1.0.1",
+  "description": "Array manipulation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "npx tsc",
+    "build": "npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devsstudio/array.git"
+  },
+  "author": "Devs Studio",
+  "license": "ISC",
+  "keywords": [
+    "array"
+  ],
+  "bugs": {
+    "url": "https://github.com/devsstudio/array/issues"
+  },
+  "homepage": "https://github.com/devsstudio/array#readme",
+  "dependencies": {
+    "@devs-studio/string": "^1.0.36",
+    "typescript": "^5.6.2"
+  }
+}
