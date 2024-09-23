@@ -1,6 +1,6 @@
 {
   "name": "@devs-studio/array",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Array manipulation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

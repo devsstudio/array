@@ -5,13 +5,14 @@ export interface ArrayUniqueItem {
 }
 
 export enum ArrayUniqueProcessType {
+  NONE = "NONE",
   CASEINSENSITIVE = "CASEINSENSITIVE",
   ALIAS = "ALIAS",
   SPACES = "SPACES"
 }
 
 export class ArrayObjectHelper {
-  static checkDuplicates(inputs: ArrayUniqueItem[], fields: string[], processType: ArrayUniqueProcessType): boolean {
+  static checkDuplicates(inputs: ArrayUniqueItem[], fields: string[], processType: ArrayUniqueProcessType = ArrayUniqueProcessType.NONE): boolean {
 
     var items = inputs.reduce<string[]>((acc, cur) => {
       // Verificar si cur es un objeto vacío
@@ -21,20 +22,28 @@ export class ArrayObjectHelper {
 
       var parts = [];
       for (let field of fields) {
-        var value = cur[field].toLowerCase();
-        switch (processType) {
-          case ArrayUniqueProcessType.ALIAS:
-            parts.push(generateAlias(value));
-            break;
-          case ArrayUniqueProcessType.SPACES:
-            parts.push(value.replace(/\s/g, ''));
-            break;
-          default:
-            parts.push(value);
-            break;
+        var value = cur[field];
+        if (value) {
+          var str: string = value.toString()
+          switch (processType) {
+            case ArrayUniqueProcessType.ALIAS:
+              parts.push(generateAlias(str));
+              break;
+            case ArrayUniqueProcessType.SPACES:
+              parts.push(str.replace(/\s/g, ''));
+              break;
+            case ArrayUniqueProcessType.CASEINSENSITIVE:
+              parts.push(str.toLowerCase());
+              break;
+            default:
+              parts.push(value);
+              break;
+          }
         }
       }
-      acc.push(parts.join('|'));
+      if (parts.length > 0) {
+        acc.push(parts.join('|'));
+      }
       return acc;
     }, []);
 
